@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Search</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        li:hover {
+            transform: translateY(-5px);
+        }
+        h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>News Search</h1>
+    <form action="/" method="POST">
+        <input type="text" name="query" placeholder="검색할 키워드를 입력하세요" value="{{ query }}">
+        <input type="submit" value="검색">
+    </form>
+
+    {% if news_data %}
+    <ul>
+        {% for item in news_data %}
+        <li>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
+            <p>출처: <a href="{{ item.originallink }}" target="_blank">{{ item.originallink }}</a></p>
+            <p>발행일: {{ item.pubDate }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>뉴스 검색 결과가 없습니다. 키워드를 입력하고 검색하세요.</p>
+    {% endif %}
+</body>
+</html>
